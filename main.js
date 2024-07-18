@@ -22,3 +22,9 @@ const storeData = () => ({
   },
 });
 
+document.addEventListener("alpine:init", () => {
+  Alpine.data("storeData", storeData);
+});
+
+Alpine.start();
+
