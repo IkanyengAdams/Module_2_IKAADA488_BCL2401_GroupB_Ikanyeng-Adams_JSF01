@@ -2,12 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/public/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SwitCart</title>
+    
   </head>
-  <body>
-    <div className="grid lg:flex gap-y-4 gap-x-48 lg:items-start  mt-3 mx-auto justify-center"></div>
+  <body class="bg-blue-100">
     <header class="sticky z-50 top-0">
       <nav class="bg-gray-500 border-gray-200">
         <div
@@ -171,7 +171,7 @@
       </form>
     
       <div class="flex sm:w-[95%] max-w-[21rem] md:w-full justify-end">
-        <label htmlFor="sort" class="w-20 my-auto font-semibold ">Sort by</label>
+        <label htmlFor="sort" class="w-20 my-auto font-semibol">Sort by</label>
         <select
           name=""
           id="sort"
@@ -183,11 +183,14 @@
         </select>
       </div>
     </div>
-    
+    </div>
+      
 
-   
+    
+    <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
 
     <script type="module" src="/main.js"></script>
-    <script type="module" src="/counter.js"></script>
+    <script type="module" src="counter.js">
+    </script>
   </body>
 </html>
