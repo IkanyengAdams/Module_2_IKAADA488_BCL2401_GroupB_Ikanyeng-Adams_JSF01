@@ -95,50 +95,51 @@
     
     <div class="grid lg:flex gap-y-4 gap-x-48 lg:items-start  mt-3 mx-auto justify-center">
       <form>
-        <div class="flex lg:w-[31.25rem] sm:w-[95%] md:w-full relative" >
+        <div class="flex lg:w-[31.25rem] sm:w-[95%] md:w-full relative" x-data="{ open: false, buttonText: 'All Categories' }">
           <button
-  id="dropdown-button"
-  data-dropdown-toggle="dropdown"
-  class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200"
-  type="button"
-  x-data="{ buttonText: 'All Categories'}"
-  x-text="buttonText"
->
-  <svg
-    class="w-2.5 h-2.5 ms-2.5"
-    aria-hidden="true"
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 10 6"
-  >
-    <path
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      d="m1 1 4 4 4-4"
-    />
-  </svg>
-</button>
+            id="dropdown-button"
+            class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200"
+            type="button"
+            @click="open = !open"
+            aria-expanded="open"
+          >
+            <span x-text="buttonText"></span>
+            <svg
+              class="w-2.5 h-2.5 ms-2.5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="m1 1 4 4 4-4"
+              />
+            </svg>
+          </button>
+      
+          <!-- Dropdown Menu -->
           <div
-            id="dropdown"
-            class="z-10 absolute top-[100%] hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+            x-show="open"
+            @click.outside="open = false"
+            class="z-10 absolute top-[100%] bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+            style="display: none;"
           >
             <ul
               class="py-2 text-sm text-gray-700"
               aria-labelledby="dropdown-button"
             >
-              <li class="inline-flex w-full px-4 py-2 hover:bg-gray-100">
-                All categories
-              </li>
-              <li class="inline-flex w-full px-4 py-2 hover:bg-gray-100">
-                Category 1
-              </li>
-              <li class="inline-flex w-full px-4 py-2 hover:bg-gray-100">
-                Category 2
-              </li>
+              <li class="inline-flex w-full px-4 py-2 hover:bg-gray-100" @click="buttonText = 'All Categories'; open = false">All Categories</li>
+              <li class="inline-flex w-full px-4 py-2 hover:bg-gray-100" @click="buttonText = 'Electronics'; open = false">Electronics</li>
+              <li class="inline-flex w-full px-4 py-2 hover:bg-gray-100" @click="buttonText = 'Jewelry'; open = false">Jewelry</li>
+              <li class="inline-flex w-full px-4 py-2 hover:bg-gray-100" @click="buttonText = 'Men\'s Clothing'; open = false">Men's Clothing</li>
+              <li class="inline-flex w-full px-4 py-2 hover:bg-gray-100" @click="buttonText = 'Women\'s Clothing'; open = false">Women's Clothing</li>
             </ul>
           </div>
+      
           <div class="relative w-full">
             <input
               type="search"
