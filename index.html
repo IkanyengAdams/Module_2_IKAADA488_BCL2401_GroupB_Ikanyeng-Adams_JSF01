@@ -121,24 +121,17 @@
             </svg>
           </button>
       
-          <!-- Dropdown Menu -->
-          <div
-            x-show="open"
-            @click.outside="open = false"
-            class="z-10 absolute top-[100%] bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
-            style="display: none;"
+        
+          <select
+            x-model="selectedCategory"
+            @change="filterProducts"
+            class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200"
           >
-            <ul
-              class="py-2 text-sm text-gray-700"
-              aria-labelledby="dropdown-button"
-            >
-              <li class="inline-flex w-full px-4 py-2 hover:bg-gray-100" @click="buttonText = 'All Categories'; open = false">All Categories</li>
-              <li class="inline-flex w-full px-4 py-2 hover:bg-gray-100" @click="buttonText = 'Electronics'; open = false">Electronics</li>
-              <li class="inline-flex w-full px-4 py-2 hover:bg-gray-100" @click="buttonText = 'Jewelry'; open = false">Jewelry</li>
-              <li class="inline-flex w-full px-4 py-2 hover:bg-gray-100" @click="buttonText = 'Men\'s Clothing'; open = false">Men's Clothing</li>
-              <li class="inline-flex w-full px-4 py-2 hover:bg-gray-100" @click="buttonText = 'Women\'s Clothing'; open = false">Women's Clothing</li>
-            </ul>
-          </div>
+            <option value="">All Categories</option>
+            <template x-for="category in categories" :key="category">
+              <option :value="category" x-text="category"></option>
+            </template>
+          </select>
       
           <div class="relative w-full">
             <input
