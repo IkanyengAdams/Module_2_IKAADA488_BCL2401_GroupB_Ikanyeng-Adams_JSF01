@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/public/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SwitCart</title>
+    <title>SwiftCart</title>
+    <script defer src="/app.js"></script>
   </head>
-  <body class="bg-blue-100">
+  <body x-data="index" class="bg-blue-100">
     <header class="sticky z-50 top-0">
       <nav class="bg-gray-500 border-gray-200">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -16,29 +17,74 @@
               SwiftCart
             </span>
           </button>
-          <button @click="open = !open"
-            data-collapse-toggle="navbar-default"
-            type="button"
-            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-            aria-controls="navbar-default"
-            aria-expanded="false"
-          >
-            <span class="sr-only">Open main menu</span>
-            <svg class="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
-          </button>
+          <div x-data="{ open: false }">
+            <!-- Sidebar -->
+            <div x-show="open"
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0 transform -translate-x-full"
+                 x-transition:enter-end="opacity-100 transform translate-x-0"
+                 x-transition:leave="transition ease-in duration-300"
+                 x-transition:leave-start="opacity-100 transform translate-x-0"
+                 x-transition:leave-end="opacity-0 transform -translate-x-full"
+                 class="fixed top-0 left-0 bottom-0 h-full w-[220px] bg-gray-500 shadow-2xl md:hidden">
+              <button class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img src="/online-shop.png" class="h-8" alt="Flowbite Logo" />
+                <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">
+                  SwiftCart
+                </span>
+              </button>
+              <ul class="flex flex-col top-10 font-medium p-4 md:p-0 mt-4 rounded-lg bg-gray-500 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+                <li class="block py-2 px-3 text-white rounded hover:bg-gray-400 md:hover:bg-blue-100 md:border-0 md:hover:text-blue-700 md:p-0">
+                  Wishlist
+                </li>
+                <li class="hidden lg:block md:block relative">
+                  <div class="t-0 absolute left-3 -top-4">
+                    <p class="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">
+                      <span x-show="productCounter" x-transition x-text="productCounter" class=""></span>
+                    </p>
+                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                       fill="none"
+                       viewBox="0 0 24 24"
+                       strokeWidth="1.5"
+                       stroke="currentColor"
+                       class="file: h-6 w-6 stroke-white cursor-pointer">
+                    <path strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/>
+                  </svg>
+                </li>
+                <li class="lg:hidden md:hidden py-2 px-3 text-white rounded hover:bg-gray-400 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">
+                  Cart
+                </li>
+                <li class="block py-2 px-3 text-white rounded hover:bg-gray-400 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">
+                  <a href="/login.html">Login</a>
+                </li>
+              </ul>
+            </div>
+            <!-- Hamburger Button -->
+            <button @click="open = !open"
+                    data-collapse-toggle="navbar-default"
+                    type="button"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                    aria-controls="navbar-default"
+                    aria-expanded="false">
+              <span class="sr-only">Open main menu</span>
+              <svg class="w-5 h-5"
+                   aria-hidden="true"
+                   xmlns="http://www.w3.org/2000/svg"
+                   fill="none"
+                   viewBox="0 0 17 14">
+                <path stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M1 1h15M1 7h15M1 13h15"/>
+              </svg>
+            </button>
+          </div>
+          
+          
           <div x-data="{ open: false }"
             :class="{ 'block': open, 'hidden': !open }"
             class="w-full md:block md:w-auto"
@@ -51,7 +97,7 @@
               <li class="hidden lg:block md:block relative">
                 <div class="t-0 absolute left-3 -top-4">
                   <p class="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">
-                    2
+                    <span x-show="productCounter" x-transition x-text="productCounter" class=""></span>
                   </p>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -70,6 +116,7 @@
               </li>
               <li class="lg:hidden md:hidden py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">
                 Cart
+                
               </li>
               <li class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">
                 <a href="/login.html">Login</a>
@@ -161,7 +208,7 @@
          @keydown.escape.window="modalOpen = false"
          class="flex flex-col max-h-[130rem] cursor-pointer max-w-80 hover:-translate-y-1 hover:scale-105 duration-300 bg-white border border-slate-200 shadow shadow-slate-950/5 rounded-2xl overflow-hidden">
       <div @click="modalOpen=true">
-        <img class="object-contain h-48 mt-3" :src="product.image" />
+        <img class="object-contain h-48 mt-8 mx-auto" :src="product.image" />
         <div class="flex-1 flex flex-col p-6">
           <div class="flex-1">
             <header class="mb-2 flex-2">
