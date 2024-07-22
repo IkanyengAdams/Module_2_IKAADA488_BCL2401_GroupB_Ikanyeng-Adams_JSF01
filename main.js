@@ -9,6 +9,7 @@ const storeData = () => ({
   categories: [],
   selectedCategory: '',
   showModal: false,
+  selectedProduct: null,
   loading: true,
   init() {
     this.loading = true;
@@ -37,6 +38,14 @@ const storeData = () => ({
         (product) => product.category === this.selectedCategory
       );
     }
+  },
+  selectProduct(product) {
+    this.selectedProduct = product;
+    this.showModal = true;
+  },
+  closeModal() {
+    this.showModal = false;
+    this.selectedProduct = null;
   },
 });
 
