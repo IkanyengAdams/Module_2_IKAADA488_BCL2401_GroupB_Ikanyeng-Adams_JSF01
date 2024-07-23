@@ -1,5 +1,8 @@
 document.addEventListener('alpine:init',() => {
   Alpine.data('index', () => ({
-    productCounter: 9,
+    productCounter: 10,
+    addToCart() {
+      this.productCounter++;
+    },
   }))
 })

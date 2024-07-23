@@ -1,6 +1,9 @@
 import "./style.css";
 import Alpine from "alpinejs";
 window.Alpine = Alpine;
+import focus from '@alpinejs/focus'
+
+Alpine.plugin(focus)
 
 const storeData = () => ({
   data: {
@@ -8,6 +11,7 @@ const storeData = () => ({
   },
   categories: [],
   selectedCategory: '',
+  searchQuery: '', 
   showModal: false,
   selectedProduct: null,
   loading: true,
@@ -31,13 +35,18 @@ const storeData = () => ({
       });
   },
   filterProducts() {
-    if (this.selectedCategory === '') {
-      return this.data.products;
-    } else {
-      return this.data.products.filter(
+    let filteredProducts = this.data.products;
+    if (this.selectedCategory !== '') {
+      filteredProducts = filteredProducts.filter(
         (product) => product.category === this.selectedCategory
       );
     }
+    if (this.searchQuery !== '') {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
+    return filteredProducts;
   },
   selectProduct(product) {
     this.selectedProduct = product;
